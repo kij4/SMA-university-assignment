@@ -1,0 +1,58 @@
+SAVE MY_CROPS. SQL CREATE
+/*the save command is used to create individual files for each table in the script. The append function at the end of the script section
+adds the script to the file. Thus allowing the script for each table to be saved separately so they can be used indicidually rather than running or editing the full script for later use */
+
+CREATE TABLE MY_CROPS
+/* number has been used for all attributes that have number values. No constraint has been set for how big/small a number is to allow for further expansion of the data base. */
+/* varchar2 has been used for attributes that have a string of digits to describe them, these are followed by a number in brackets e.g.(15) to limit the number of characters */
+/* 'DATE' has been used for the start and end season to ensure that dates are formatted properly within the table. */
+(CROP NUMBER, 
+NAME VARCHAR2(15)NOT NULL,
+START_SEASON DATE NOT NULL,
+END_SEASON DATE NOT NULL,
+PRIMARY KEY (CROP))
+;
+SAVE MY_CROPS.SQL APPEND;
+
+SAVE MY_CLASS.SQL CREATE
+
+CREATE TABLE MY_CLASS
+(TYPE NUMBER, 
+NAME VARCHAR2(15)NOT NULL,
+PERIOD VARCHAR2(15)NOT NULL,
+USE VARCHAR2(15)NOT NULL,
+PRIMARY KEY (TYPE))
+;
+SAVE MY_CLASS.SQL APPEND;
+
+SAVE MY_FINDS.SQL CREATE
+
+CREATE TABLE MY_FINDS
+(FIND_ID NUMBER,
+XCOORD NUMBER(2)NOT NULL CHECK (XCOORD BETWEEN 0 AND 16),
+YCOORD NUMBER(2)NOT NULL CHECK (YCOORD BETWEEN 0 AND 16),
+TYPE NUMBER (2)NOT NULL,
+DEPTH NUMBER (4, 2)NOT NULL,
+FIELD_NOTES VARCAHR2(40) NOT NULL,
+PRIMARY KEY (FIND_ID),
+FOREIGN KEY(TYPE)REFERENCES MY_CLASS(TYPE),
+CONSTRAINT FIELD_POSITION UNIQUE (XCOORD, YCOORD))
+;
+SAVE MY_FINDS.SQL APPEND;
+
+SAVE MY_FIELDS.SQL CREATE
+CREATE TABLE MY_FIELDS
+(FIELD_ID NUMBER, 
+LOWX NUMBER(2)NOT NULL CHECK (LOWX BETWEEN 0 AND 16),
+LOWY NUMBER(2)NOT NULL CHECK (LOWY BETWEEN 0 AND 16),
+HIX NUMBER(2)NOT NULL CHECK (HIX BETWEEN 0 AND 16),
+HIY NUMBER(2)NOT NULL CHECK (HIY BETWEEN 0 AND 16),
+AREA NUMBER(2)NOT NULL,
+OWNER VARCHAR2(15)NOT NULL,
+PRIMARY KEY(FIELD_ID),
+FOREIGN KEY(CROP)REFERENCES MY_CROPS(CROP),
+CONSTRAINT FIELD_BOUNDARY UNIQUE (LOWX, LOWY, HIX, HIY))
+;
+SAVE MY_FIELDS.SQL APPEND;
+
+EXIT
