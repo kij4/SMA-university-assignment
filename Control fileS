@@ -1,0 +1,46 @@
+/* these are the control files writeen in SQL language, they tell the SQL*loader where to find the data, how to parse and interpret the data as well as inserting the data */
+
+/* control file for the table 'MY_CROPS'*/
+
+LOAD DATA
+INFILE 'crops.dat'
+BADFILE 'crops.bad'
+DISCARDFILE 'crops.dsc'
+INSERT
+INTO TABLE MY_CROPS
+FIELDS TERMINATED BY '\t'
+TRAILING NULLCOLS
+(CROP, NAME, START_SEASON, END_SEASON)
+
+/* control file for the table 'MY_CLASS' */
+LOAD DATA
+INFILE 'artefact_type.dat'
+BADFILE 'class.bad'
+DISCARDFILE 'class.dsc'
+INSERT
+INTO TABLE MY_CLASS
+FIELDS TERMINATED BY '\t'
+TRAILING NULLCOLS
+(TYPE, NAME, PERIOD, USE)
+
+/* control file for table 'MY_FINDS' */
+LOAD DATA
+INFILE 'finds.dat'
+BADFILE 'finds.bad'
+DISCARDFILE 'finds.dsc'
+INSERT
+INTO TABLE MY_FINDS
+FIELDS TERMINATED BY '\t'
+TRAILING NULLCOLS
+(FIND_ID, XCOORD, YCOORD, TYPE, DEPTH, FIELD_NOTES)
+
+/*control file for table 'MY_FIELDS'
+LOAD DATA
+INFILE 'fields.dat'
+BADFILE 'fields.bad'
+DISCARDFILE 'fields.dsc'
+INSERT
+INTO TABLE MY_FIELDS
+FIELDS TERMINATED BY '\t'
+TRAILING NULLCOLS
+(FIELD_ID, LOWX, LOWY, HIX, HIY, AREA, OWNER, CROP)
