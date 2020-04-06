@@ -1,0 +1,21 @@
+/* Query one was writtedn to retrieve which fields contained Bronze Age Finds */
+
+SELECT MY_FIELDS.FIELD_ID, MY_FINDS.FIND_ID, MY_CLASS.PERIOD
+FROM MY_CLASS, MY_FINDS, MY_FIELDS
+WHERE MY_CLASS.PERIOD = 'BRONZE'
+AND MY_CLASS.TYPE = MY_FINDS.TYPE
+AND MY_FINDS.XCOORD BETWEEN MY_FIELDS.LOWX AND MY_FIELDS.HIX
+AND MY_FINDS.YCOORD BETWEEN MY_FIELDS.LOWY AND MY_FIELDS.HIY
+;
+/* This script allowd for the field ID, the findId and the period to be lcoated, this script was then spooled in order to create a suitable output table. */
+
+/* Query 2 was written to search the data tables to retrieve the finds that were growing in the fields that were growing turnips. */
+
+SELECT MY_CROPS.NAME, MY_FIELDS.FIELD_ID, MY_FINDS.FIND_ID
+FROM MY_CROPS, MY_FIELDS, MY_FINDS
+WHERE MY_CROPS.NAME ='TURNIPS'
+AND MY_CROPS.CROP = MY_FIELDS.CROP
+AND MY_FINDS.XCOORD BETWEEN MY_FIELDS.LOWX AND MY_FIELDS.HIX
+AND MY FINDS.YCOORD BETWEEN MY_FIELDS.LOWY AND MY_FIELD.HIY
+;
+/* This script allowed for crop name, field ID and find IF to be retrieved in relation to one another. As with query one this script was spooled to create a suitable output table */
